@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:registration_app_flutter/login.dart';
+import 'package:registration_app_flutter/signup.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -23,7 +25,7 @@ class Welcome extends StatelessWidget {
               height: 50,
               width: 300,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => Signuppage(),));},
                 child: Text("Sign up"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
@@ -41,7 +43,7 @@ class Welcome extends StatelessWidget {
                   backgroundColor: Colors.blue,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => Loginpage(),));},
                 child: Text("Login"),
               ),
             ),

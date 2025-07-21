@@ -1,12 +1,23 @@
-
 import 'package:flutter/material.dart';
+import 'package:registration_app_flutter/login.dart';
 
-class Signuppage extends StatelessWidget {
+class Signuppage extends StatefulWidget {
   const Signuppage({super.key});
 
   @override
+  State<Signuppage> createState() => _SignuppageState();
+}
+
+class _SignuppageState extends State<Signuppage> {
+  TextEditingController usercontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController confpasscontroller = TextEditingController();
+  final formkey = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -28,7 +39,16 @@ class Signuppage extends StatelessWidget {
               ),
               SizedBox(height: 60),
               Align(alignment: Alignment.topLeft, child: Text("UserName")),
-              TextField(
+              TextFormField(
+                controller: usercontroller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "username is required";
+                  }
+                  if(value!=8){
+                    return "username must be 8 character";
+                  }
+                },
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -38,10 +58,16 @@ class Signuppage extends StatelessWidget {
                   ),
                 ),
               ),
-               SizedBox(height: 40),
+              SizedBox(height: 40),
               Align(alignment: Alignment.topLeft, child: Text("Email")),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
+              TextFormField(
+                controller: emailcontroller,
+                keyboardType: TextInputType.emailAddress,validator: (value) {
+                  if(value ==null||value.isEmpty){return "email is required ";}
+                  if (!value.contains("@")){
+                    return "@ is required";
+                  }
+                },
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -50,9 +76,11 @@ class Signuppage extends StatelessWidget {
                   ),
                 ),
               ),
-               SizedBox(height: 40),
+              SizedBox(height: 40),
               Align(alignment: Alignment.topLeft, child: Text("Password")),
-              TextField(
+              TextFormField(controller: passwordcontroller,validator: (value) {if (value==null||value.isEmpty) {return "minimum 8 character is required";}
+                
+              },
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -63,8 +91,21 @@ class Signuppage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 40),
-              Align(alignment: Alignment.topLeft, child: Text("Confirm Password")),
-              TextField(
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text("Confirm Password"),
+              ),
+              TextFormField(controller: confpasscontroller,validator: (value) {
+                if(value==null || value.isEmpty){
+                  return "Password is required";
+                }
+                if(value!=8){
+                  return "Password must be of 8 characters";
+                }
+                if(value!=passwordcontroller.text){
+                  return "Password is not the same";
+                }
+              },
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -88,17 +129,36 @@ class Signuppage extends StatelessWidget {
                   child: Text("Sign Up"),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 10),
 
-              Row(mainAxisAlignment: MainAxisAlignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Already have an account?",style: TextStyle(color: Colors.black),),
-                  Text("Login",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),)
+                  Text(
+                    "Already have an account?",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Loginpage()),
+                      );
+                    },
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
-      ),);
+      ),
+    );
   }
 }
