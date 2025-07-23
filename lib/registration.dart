@@ -19,7 +19,7 @@ class Welcome extends StatelessWidget {
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 50),
-            Image(image: AssetImage("assets/login1.jpg")),
+            Image(image: AssetImage("assets/image.png")),
             SizedBox(height: 50),
             SizedBox(
               height: 50,

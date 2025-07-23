@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:registration_app_flutter/forgot.dart';
+import 'package:registration_app_flutter/services.dart';
 import 'package:registration_app_flutter/signup.dart';
 
 class Loginpage extends StatefulWidget {
@@ -57,6 +59,7 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                 ),
+                
                 SizedBox(height: 30),
                 Align(alignment: Alignment.topLeft, child: Text("Password")),
                 TextFormField(
@@ -72,6 +75,23 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                 ),
+                GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Forgot()),
+                        );
+                      },
+                      child: Align(alignment: Alignment.bottomRight,
+                        child: Text(
+                          "Forgot Password",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                 SizedBox(height: 40),
                 SizedBox(
                   height: 50,
@@ -82,7 +102,7 @@ class _LoginpageState extends State<Loginpage> {
                       foregroundColor: Colors.white,
                       side: BorderSide(color: Colors.black),
                     ),
-                    onPressed: () {},
+                    onPressed: () {loginn(email:emailcontroller.text, password: Passwordcontroller.text, context: context);},
                     child: Text("Login"),
                   ),
                 ),
@@ -112,7 +132,7 @@ class _LoginpageState extends State<Loginpage> {
                   ],
                 ),
                 SizedBox(height: 10),
-                Image(image: AssetImage("assets/image.png")),
+                Image(image: AssetImage("assets/logimage.jpg"),height: 200,width: 200),
               ],
             ),
           ),
